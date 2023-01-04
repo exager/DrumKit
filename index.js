@@ -1,12 +1,8 @@
-// Selecting all the elements with required classes
-var value = document.querySelectorAll(".w, .a, .s, .d, .j, .k, .l");
-
-//Run Event Handler for every keydown event for the specific key-presses
-for(var i = 0 ; i<value.length ; i++){
-    value[i].addEventListener("keydown", function(event) {
-        playSound(event.key);
-    });
-}
+// Selecting all the elements with required classes when key is pressed
+document.addEventListener("keydown", function(event) {
+    playSound(event.key);
+    flashKey(event.key);
+});
 
 //Function to play the audio specific to the given value
 function playSound(value){
@@ -55,5 +51,15 @@ function playSound(value){
 
         default: console.log(value + " key is not assigned any audio.")
     }
+}
 
+function flashKey(key){
+    var evt = document.querySelector('.'+key);
+    //To implement Flashy effect, firstly adding a shadow on the key element
+    evt.classList.add('pressed');
+    
+    //After some time removing that overlay shadow
+   setTimeout(function(){
+        evt.classList.remove('pressed');
+   },200)
 }
